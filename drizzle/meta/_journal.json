@@ -8,6 +8,13 @@
       "when": 1775825788977,
       "tag": "0000_perpetual_rocket_racer",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1775827986040,
+      "tag": "0001_empty_steel_serpent",
+      "breakpoints": true
     }
   ]
 }

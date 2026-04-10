@@ -5,8 +5,8 @@ export const user = pgTable("user", {
   id: text("id").primaryKey(),
   email: text("email").notNull().unique(),
   name: text("name").notNull(),
-  password: text("password").notNull(),
   emailVerified: boolean("email_verified").notNull().default(false),
+  image: text("image"),
   createdAt: timestamp("created_at").notNull(),
   updatedAt: timestamp("updated_at").notNull(),
 });
@@ -56,5 +56,3 @@ export const verification = pgTable("verification", {
     .timestamp("updated_at", {precision: 6, withTimezone: true})
     .notNull(),
 });
-
-

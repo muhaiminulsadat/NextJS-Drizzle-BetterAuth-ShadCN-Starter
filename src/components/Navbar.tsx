@@ -13,6 +13,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
+import {toast} from "sonner";
 
 export default function Navbar() {
   const router = useRouter();
@@ -27,9 +28,15 @@ export default function Navbar() {
   }, []);
 
   const handleSignOut = async () => {
-    await authClient.signOut();
-    router.push("/");
-    router.refresh();
+    await authClient.signOut({
+      fetchOptions: {
+        onSuccess: () => {
+          toast.success("Signed out successfully.");
+          router.push("/login");
+          router.refresh();
+        },
+      },
+    });
   };
 
   const getInitials = (name: string) => {
@@ -79,7 +86,9 @@ export default function Navbar() {
           </span>
         </Link>
 
-        <div className="hidden md:flex items-center gap-1">
+        <div className="hidden md:flex items-center gap-1"></div>
+
+        <div className="flex items-center gap-2">
           {session && (
             <Link
               href="/dashboard"
@@ -88,9 +97,6 @@ export default function Navbar() {
               Dashboard
             </Link>
           )}
-        </div>
-
-        <div className="flex items-center gap-2">
           {isPending ? (
             <div className="w-8 h-8 rounded-full bg-muted animate-pulse" />
           ) : session ? (
