@@ -39,3 +39,11 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# graphify local machine & cache state (keep portable graph artifacts tracked)
+graphify-out/.graphify_python
+graphify-out/.graphify_root
+graphify-out/.graphify_*
+graphify-out/cache/
+
+
