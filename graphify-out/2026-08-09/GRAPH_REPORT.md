@@ -1,11 +1,11 @@
 # Graph Report - keep-notes  (2026-08-09)
 
 ## Corpus Check
-- 46 files · ~24,442 words
+- 46 files · ~24,465 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 391 nodes · 446 edges · 37 communities (32 shown, 5 thin omitted)
+- 393 nodes · 451 edges · 36 communities (32 shown, 4 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
@@ -48,10 +48,9 @@
 - [[_COMMUNITY_Component Skill Specification|Component Skill Specification]]
 - [[_COMMUNITY_Next.js Configuration|Next.js Configuration]]
 - [[_COMMUNITY_PostCSS Configuration|PostCSS Configuration]]
-- [[_COMMUNITY_layout.tsx|layout.tsx]]
 
 ## God Nodes (most connected - your core abstractions)
-1. `cn()` - 34 edges
+1. `cn()` - 36 edges
 2. `[other sections from your preferred template]` - 31 edges
 3. `Frameworks` - 19 edges
 4. `compilerOptions` - 16 edges
@@ -63,6 +62,8 @@
 10. `Component Building Principles` - 8 edges
 
 ## Surprising Connections (you probably didn't know these)
+- `RootLayout()` --calls--> `cn()`  [EXTRACTED]
+  src/app/layout.tsx → src/lib/utils.ts
 - `AvatarBadge()` --calls--> `cn()`  [EXTRACTED]
   src/components/ui/avatar.tsx → src/lib/utils.ts
 - `AvatarGroup()` --calls--> `cn()`  [EXTRACTED]
@@ -71,17 +72,15 @@
   src/components/ui/avatar.tsx → src/lib/utils.ts
 - `CardAction()` --calls--> `cn()`  [EXTRACTED]
   src/components/ui/card.tsx → src/lib/utils.ts
-- `DropdownMenuCheckboxItem()` --calls--> `cn()`  [EXTRACTED]
-  src/components/ui/dropdown-menu.tsx → src/lib/utils.ts
 
 ## Import Cycles
 - None detected.
 
-## Communities (37 total, 5 thin omitted)
+## Communities (36 total, 4 thin omitted)
 
 ### Community 0 - "App Views & Navigation"
-Cohesion: 0.09
-Nodes (32): FEATURES, Avatar(), AvatarBadge(), AvatarFallback(), AvatarGroup(), AvatarGroupCount(), AvatarImage(), Button() (+24 more)
+Cohesion: 0.08
+Nodes (37): geistMono, geistSans, inter, metadata, RootLayout(), FEATURES, Avatar(), AvatarBadge() (+29 more)
 
 ### Community 1 - "PRD & Spec Templates"
 Cohesion: 0.05
@@ -196,23 +195,23 @@ Cohesion: 0.50
 Nodes (4): Debugging Animations, Frame-by-frame inspection, Slow motion testing, Test on real devices
 
 ## Knowledge Gaps
-- **271 isolated node(s):** `$schema`, `style`, `rsc`, `tsx`, `config` (+266 more)
+- **273 isolated node(s):** `$schema`, `style`, `rsc`, `tsx`, `config` (+268 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **5 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **4 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `[other sections from your preferred template]` connect `PRD & Spec Templates` to `Product Case Studies & Examples`, `PRD Structure & AI Prompts`?**
-  _High betweenness centrality (0.036) - this node is a cross-community bridge._
+  _High betweenness centrality (0.035) - this node is a cross-community bridge._
 - **Why does `Design Engineering` connect `Design Engineering Skill` to `UI Polish & Interaction Principles`, `Animation Decision Framework`, `Advanced CSS Patterns`, `Animation Performance Rules`, `Gesture & Drag Physics`, `3D & CSS Transform Techniques`, `Sonner Toast & UX Micro-interactions`, `Spring Physics & Interruptibility`, `Emil Design Philosophy`, `Animation Debugging & Testing`?**
   _High betweenness centrality (0.024) - this node is a cross-community bridge._
 - **Why does `Writing Product Requirement Documents - Frameworks, Templates & Checklists` connect `PRD Structure & AI Prompts` to `Product Management Principles`?**
   _High betweenness centrality (0.019) - this node is a cross-community bridge._
 - **What connects `$schema`, `style`, `rsc` to the rest of the system?**
-  _271 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _273 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `App Views & Navigation` be split into smaller, more focused modules?**
-  _Cohesion score 0.09216255442670537 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.07948568088836938 - nodes in this community are weakly interconnected._
 - **Should `PRD & Spec Templates` be split into smaller, more focused modules?**
   _Cohesion score 0.05263157894736842 - nodes in this community are weakly interconnected._
 - **Should `Production Dependencies` be split into smaller, more focused modules?**

@@ -1,6 +1,6 @@
 # Next.js 16 + Drizzle ORM + Better Auth + ShadCN Starter
 
-A production-ready starter template engineered with **Next.js 16**, **React 19**, **Better Auth**, **Drizzle ORM** (PostgreSQL / Neon), **Tailwind CSS v4**, **Shadcn UI**, and pre-configured **AI Agent Skills**.
+A production-ready starter template engineered with **Next.js 16**, **React 19**, **Better Auth**, **Drizzle ORM** (PostgreSQL / Neon), **Tailwind CSS v4**, **Shadcn UI**, pre-configured **AI Agent Skills**, and a pre-indexed **Graphify Knowledge Graph**.
 
 ---
 
@@ -8,11 +8,12 @@ A production-ready starter template engineered with **Next.js 16**, **React 19**
 
 - **Framework:** [Next.js 16](https://nextjs.org/) (App Router, Server Components & Server Actions)
 - **UI & React:** [React 19](https://react.dev/), [Shadcn UI](https://ui.shadcn.com/), [Lucide React Icons](https://lucide.dev/)
-- **Styling:** [Tailwind CSS v4](https://tailwindcss.com/), `next-themes` (Dark/Light mode support), `sonner` (Toast notifications)
+- **Styling & UI:** [Tailwind CSS v4](https://tailwindcss.com/), `next-themes` (Dark/Light mode support), `react-hot-toast` (Toast notifications)
 - **Authentication:** [Better Auth](https://better-auth.com/) (Type-safe auth client & server handlers)
 - **Database & ORM:** [Drizzle ORM](https://orm.drizzle.team/) with [@neondatabase/serverless](https://neon.tech/) PostgreSQL driver & `drizzle-kit`
 - **TypeScript:** Strict type checking across API routes, database schemas, and components
 - **AI Agent Skills:** Pre-configured `.agents/skills` repository integrations via [skills.sh](https://skills.sh)
+- **Knowledge Graph:** Pre-built [Graphify](https://github.com/safishamsi/graphify) knowledge graph (`graphify-out/`) for instant AI code context and visual architecture mapping.
 
 ---
 
@@ -22,6 +23,7 @@ A production-ready starter template engineered with **Next.js 16**, **React 19**
 - 🗄️ **Type-Safe Database Workflow:** Schema definitions in TypeScript via Drizzle ORM with instant migration syncing.
 - 🎨 **Modern Design System:** Built-in Shadcn UI primitives, custom utility helpers (`clsx`, `tailwind-merge`), and theme provider support.
 - 🤖 **Agentic AI Prepared:** Configured with Cursor / Agent Skills for high-quality code generation, design engine polish, and PRD reviews.
+- 🧠 **Instant Knowledge Graph:** Pre-indexed codebase graph allowing AI agents to query architecture (`graphify query`) with zero startup delay.
 
 ---
 
@@ -32,6 +34,11 @@ A production-ready starter template engineered with **Next.js 16**, **React 19**
 ├── .agents/                    # Agent skills directory
 │   └── skills/                 # Pre-installed agent skills
 ├── drizzle/                    # Generated SQL migration files
+├── graphify-out/               # Pre-built Knowledge Graph & Codebase Map
+│   ├── GRAPH_REPORT.md         # Architecture & community audit report
+│   ├── graph.html              # Interactive visual knowledge graph (open in browser)
+│   ├── graph.json              # GraphRAG dataset for instant AI context
+│   └── manifest.json           # File hash manifest for incremental graph updates
 ├── public/                     # Static assets
 ├── src/
 │   ├── app/                    # Next.js App Router (pages & layout)
@@ -63,54 +70,91 @@ Ensure you have the following installed on your system:
 
 ---
 
-### Installation & Setup
+### Step-by-Step Setup Guide
 
-1. **Clone the Repository:**
+#### 1. Clone & Decouple Git History
 
-   ```bash
-   git clone <repository-url>
-   cd keep-notes
-   ```
+Clone the starter template, then remove the template's `.git` history and initialize a fresh git repository for your new application:
 
-2. **Install Dependencies:**
+**On macOS / Linux / Git Bash:**
+```bash
+# 1. Clone the starter repository into your new project directory
+git clone <repository-url> my-new-app
+cd my-new-app
 
-   ```bash
-   npm install
-   ```
+# 2. Remove template git history and initialize your new project repository
+rm -rf .git
+git init
+```
 
-3. **Configure Environment Variables:**
+**On Windows (PowerShell):**
+```powershell
+# 1. Clone the starter repository into your new project directory
+git clone <repository-url> my-new-app
+cd my-new-app
 
-   Create a `.env` file in the root directory (or update the existing `.env`):
+# 2. Remove template git history and initialize your new project repository
+Remove-Item -Recurse -Force .git
+git init
+```
 
-   ```env
-   # Database connection string (PostgreSQL / Neon)
-   DATABASE_URL="postgresql://user:password@ep-example-123456.neon.tech/neondb?sslmode=require"
+#### 2. Install Dependencies
 
-   # Better Auth Secret (Generate a strong random string)
-   BETTER_AUTH_SECRET="your-super-secret-key-here"
+```bash
+npm install
+```
 
-   # Base URL for local development
-   BETTER_AUTH_URL="http://localhost:3000"
-   NEXT_PUBLIC_APP_URL="http://localhost:3000"
-   ```
+#### 3. Configure Environment Variables
 
-4. **Run Database Migrations:**
+Create a `.env` file in the root directory (or update the existing `.env`):
 
-   Sync your TypeScript database schema directly with your PostgreSQL database using Drizzle Kit:
+```env
+# Database connection string (PostgreSQL / Neon)
+DATABASE_URL="postgresql://user:password@ep-example-123456.neon.tech/neondb?sslmode=require"
 
-   ```bash
-   npx drizzle-kit push
-   ```
+# Better Auth Secret (Generate a strong random string)
+BETTER_AUTH_SECRET="your-super-secret-key-here"
 
-   *(Optional: Generate migration files with `npx drizzle-kit generate`)*
+# Base URL for local development
+BETTER_AUTH_URL="http://localhost:3000"
+NEXT_PUBLIC_APP_URL="http://localhost:3000"
+```
 
-5. **Start the Development Server:**
+#### 4. Run Database Migrations
 
-   ```bash
-   npm run dev
-   ```
+Sync your TypeScript database schema directly with your PostgreSQL database using Drizzle Kit:
 
-   Open [http://localhost:3000](http://localhost:3000) in your browser to view the application.
+```bash
+npx drizzle-kit push
+```
+
+*(Optional: Launch Drizzle Studio DB viewer with `npx drizzle-kit studio`)*
+
+#### 5. Start the Development Server
+
+```bash
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) in your browser to view the application.
+
+---
+
+## 🧠 Knowledge Graph (Graphify)
+
+This repository includes a pre-built knowledge graph located in `graphify-out/`.
+
+- **Visual Architecture Map:** Open `graphify-out/graph.html` in your browser for an interactive visual representation of all modules, components, and relationships.
+- **AI Agent Context:** AI agents working in this repository can immediately run `/graphify query "<question>"` to locate relevant files without reading the entire codebase.
+- **Updating the Graph:** After making significant code additions or refactoring, update the graph:
+
+```bash
+# Incremental update (re-extracts only changed files)
+graphify update .
+
+# Full rebuild
+/graphify .
+```
 
 ---
 
